@@ -49,7 +49,7 @@ rule CUSTOM_COMMAND_DEP
  restat = 1
 
 rule REGENERATE_BUILD
- command = '/usr/bin/python3' '/usr/share/meson/meson' --internal regenerate '/home/kaii/fuse' '/home/kaii/fuse/kaii' --backend ninja
+ command = '/usr/bin/python3' '/usr/share/meson/meson' --internal regenerate '/home/kaii/ass-os-group-10' '/home/kaii/ass-os-group-10/kaii' --backend ninja
  description = Regenerating build files
  generator = 1
 
@@ -58,6 +58,24 @@ rule REGENERATE_BUILD
 build PHONY: phony
 
 # Build rules for targets
+
+build util/mount.fuse3@exe/mount.fuse.c.o: c_COMPILER ../util/mount.fuse.c
+ DEPFILE = util/mount.fuse3@exe/mount.fuse.c.o.d
+ ARGS = '-Iutil/mount.fuse3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
+
+build util/mount.fuse3: c_LINKER util/mount.fuse3@exe/mount.fuse.c.o
+ LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed'
+
+build util/fusermount3@exe/util_mount_util.c.o: c_COMPILER util/mount_util.c
+ DEPFILE = util/fusermount3@exe/util_mount_util.c.o.d
+ ARGS = '-Iutil/fusermount3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
+
+build util/fusermount3@exe/fusermount.c.o: c_COMPILER ../util/fusermount.c
+ DEPFILE = util/fusermount3@exe/fusermount.c.o.d
+ ARGS = '-Iutil/fusermount3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
+
+build util/fusermount3: c_LINKER util/fusermount3@exe/util_mount_util.c.o util/fusermount3@exe/fusermount.c.o
+ LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed'
 
 build lib/fuse3@sha/fuse.c.o: c_COMPILER ../lib/fuse.c
  DEPFILE = lib/fuse3@sha/fuse.c.o.d
@@ -113,40 +131,15 @@ build lib/fuse3@sha/modules_iconv.c.o: c_COMPILER ../lib/modules/iconv.c
 
 build lib/fuse3@sha/lib/libfuse3.so.3.0.0.symbols: SHSYM lib/libfuse3.so.3.0.0
 
-build lib/libfuse3.so.3.0.0: c_LINKER lib/fuse3@sha/fuse.c.o lib/fuse3@sha/fuse_loop.c.o lib/fuse3@sha/fuse_loop_mt.c.o lib/fuse3@sha/fuse_lowlevel.c.o lib/fuse3@sha/fuse_opt.c.o lib/fuse3@sha/fuse_signals.c.o lib/fuse3@sha/buffer.c.o lib/fuse3@sha/cuse_lowlevel.c.o lib/fuse3@sha/helper.c.o lib/fuse3@sha/modules_subdir.c.o lib/fuse3@sha/mount.c.o lib/fuse3@sha/mount_util.c.o lib/fuse3@sha/modules_iconv.c.o | /home/kaii/fuse/lib/fuse_versionscript
- LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' '-shared' '-fPIC' '-Wl,-soname,libfuse3.so.3' '-pthread' '-Wl,--version-script,/home/kaii/fuse/lib/fuse_versionscript' '-ldl' '-Wl,-rpath,/home/kaii/fuse/kaii/lib'
+build lib/libfuse3.so.3.0.0: c_LINKER lib/fuse3@sha/fuse.c.o lib/fuse3@sha/fuse_loop.c.o lib/fuse3@sha/fuse_loop_mt.c.o lib/fuse3@sha/fuse_lowlevel.c.o lib/fuse3@sha/fuse_opt.c.o lib/fuse3@sha/fuse_signals.c.o lib/fuse3@sha/buffer.c.o lib/fuse3@sha/cuse_lowlevel.c.o lib/fuse3@sha/helper.c.o lib/fuse3@sha/modules_subdir.c.o lib/fuse3@sha/mount.c.o lib/fuse3@sha/mount_util.c.o lib/fuse3@sha/modules_iconv.c.o | /home/kaii/ass-os-group-10/lib/fuse_versionscript
+ LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' '-shared' '-fPIC' '-Wl,-soname,libfuse3.so.3' '-pthread' '-Wl,--version-script,/home/kaii/ass-os-group-10/lib/fuse_versionscript' '-ldl' '-Wl,-rpath,/home/kaii/ass-os-group-10/kaii/lib'
 
-build example/vcowfs@exe/vcowfs.c.o: c_COMPILER ../example/vcowfs.c
- DEPFILE = example/vcowfs@exe/vcowfs.c.o.d
- ARGS = '-Iexample/vcowfs@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
+build test/test_write_cache@exe/test_write_cache.c.o: c_COMPILER ../test/test_write_cache.c
+ DEPFILE = test/test_write_cache@exe/test_write_cache.c.o.d
+ ARGS = '-Itest/test_write_cache@exe' '-Itest' '-I../test' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread'
 
-build example/vcowfs: c_LINKER example/vcowfs@exe/vcowfs.c.o | lib/fuse3@sha/lib/libfuse3.so.3.0.0.symbols
- LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' 'lib/libfuse3.so.3.0.0' '-Wl,-rpath,/home/kaii/fuse/kaii/lib'
-
-build util/mount.fuse3@exe/mount.fuse.c.o: c_COMPILER ../util/mount.fuse.c
- DEPFILE = util/mount.fuse3@exe/mount.fuse.c.o.d
- ARGS = '-Iutil/mount.fuse3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
-
-build util/mount.fuse3: c_LINKER util/mount.fuse3@exe/mount.fuse.c.o
- LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed'
-
-build test/wrong_command@exe/wrong_command.c.o: c_COMPILER ../test/wrong_command.c
- DEPFILE = test/wrong_command@exe/wrong_command.c.o.d
- ARGS = '-Itest/wrong_command@exe' '-Itest' '-I../test' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
-
-build test/wrong_command: c_LINKER test/wrong_command@exe/wrong_command.c.o
- LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed'
-
-build util/fusermount3@exe/util_mount_util.c.o: c_COMPILER util/mount_util.c
- DEPFILE = util/fusermount3@exe/util_mount_util.c.o.d
- ARGS = '-Iutil/fusermount3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
-
-build util/fusermount3@exe/fusermount.c.o: c_COMPILER ../util/fusermount.c
- DEPFILE = util/fusermount3@exe/fusermount.c.o.d
- ARGS = '-Iutil/fusermount3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
-
-build util/fusermount3: c_LINKER util/fusermount3@exe/util_mount_util.c.o util/fusermount3@exe/fusermount.c.o
- LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed'
+build test/test_write_cache: c_LINKER test/test_write_cache@exe/test_write_cache.c.o | lib/fuse3@sha/lib/libfuse3.so.3.0.0.symbols
+ LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' 'lib/libfuse3.so.3.0.0' '-pthread' '-Wl,-rpath,/home/kaii/ass-os-group-10/kaii/lib'
 
 build test/test_syscalls@exe/test_syscalls.c.o: c_COMPILER ../test/test_syscalls.c
  DEPFILE = test/test_syscalls@exe/test_syscalls.c.o.d
@@ -155,27 +148,34 @@ build test/test_syscalls@exe/test_syscalls.c.o: c_COMPILER ../test/test_syscalls
 build test/test_syscalls: c_LINKER test/test_syscalls@exe/test_syscalls.c.o
  LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed'
 
-build test/test_write_cache@exe/test_write_cache.c.o: c_COMPILER ../test/test_write_cache.c
- DEPFILE = test/test_write_cache@exe/test_write_cache.c.o.d
- ARGS = '-Itest/test_write_cache@exe' '-Itest' '-I../test' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread'
+build util/mount_util.c: CUSTOM_COMMAND ../util/../lib/mount_util.c
+ COMMAND = 'cp' '-a' '../util/../lib/mount_util.c' 'util/mount_util.c'
+ description = 'Generating$ mount_util$ with$ a$ custom$ command.'
 
-build test/test_write_cache: c_LINKER test/test_write_cache@exe/test_write_cache.c.o | lib/fuse3@sha/lib/libfuse3.so.3.0.0.symbols
- LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' 'lib/libfuse3.so.3.0.0' '-pthread' '-Wl,-rpath,/home/kaii/fuse/kaii/lib'
+build test/conftest.py test/pytest.ini test/test_examples.py test/util.py: CUSTOM_COMMAND ../test/conftest.py ../test/pytest.ini ../test/test_examples.py ../test/util.py
+ COMMAND = 'cp' '-fPu' '--preserve=mode' '../test/conftest.py' '../test/pytest.ini' '../test/test_examples.py' '../test/util.py' '/home/kaii/ass-os-group-10/kaii/test'
+ description = 'Generating$ test_scripts$ with$ a$ custom$ command.'
+
+build example/vcowfs@exe/vcowfs.c.o: c_COMPILER ../example/vcowfs.c
+ DEPFILE = example/vcowfs@exe/vcowfs.c.o.d
+ ARGS = '-Iexample/vcowfs@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
+
+build example/vcowfs: c_LINKER example/vcowfs@exe/vcowfs.c.o | lib/fuse3@sha/lib/libfuse3.so.3.0.0.symbols
+ LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' 'lib/libfuse3.so.3.0.0' '-Wl,-rpath,/home/kaii/ass-os-group-10/kaii/lib'
 
 build test/test_setattr@exe/test_setattr.c.o: c_COMPILER ../test/test_setattr.c
  DEPFILE = test/test_setattr@exe/test_setattr.c.o.d
  ARGS = '-Itest/test_setattr@exe' '-Itest' '-I../test' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread'
 
 build test/test_setattr: c_LINKER test/test_setattr@exe/test_setattr.c.o | lib/fuse3@sha/lib/libfuse3.so.3.0.0.symbols
- LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' 'lib/libfuse3.so.3.0.0' '-pthread' '-Wl,-rpath,/home/kaii/fuse/kaii/lib'
+ LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed' 'lib/libfuse3.so.3.0.0' '-pthread' '-Wl,-rpath,/home/kaii/ass-os-group-10/kaii/lib'
 
-build test/conftest.py test/pytest.ini test/test_examples.py test/util.py: CUSTOM_COMMAND ../test/conftest.py ../test/pytest.ini ../test/test_examples.py ../test/util.py
- COMMAND = 'cp' '-fPu' '--preserve=mode' '../test/conftest.py' '../test/pytest.ini' '../test/test_examples.py' '../test/util.py' '/home/kaii/fuse/kaii/test'
- description = 'Generating$ test_scripts$ with$ a$ custom$ command.'
+build test/wrong_command@exe/wrong_command.c.o: c_COMPILER ../test/wrong_command.c
+ DEPFILE = test/wrong_command@exe/wrong_command.c.o.d
+ ARGS = '-Itest/wrong_command@exe' '-Itest' '-I../test' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result'
 
-build util/mount_util.c: CUSTOM_COMMAND ../util/../lib/mount_util.c
- COMMAND = 'cp' '-a' '../util/../lib/mount_util.c' 'util/mount_util.c'
- description = 'Generating$ mount_util$ with$ a$ custom$ command.'
+build test/wrong_command: c_LINKER test/wrong_command@exe/wrong_command.c.o
+ LINK_ARGS = '-Wl,--no-undefined' '-Wl,--as-needed'
 
 # Test rules
 
@@ -193,25 +193,25 @@ build benchmark: CUSTOM_COMMAND all PHONY
 
 build install: CUSTOM_COMMAND PHONY | all
  DESC = Installing$ files.
- COMMAND = '/usr/bin/python3' '/usr/share/meson/meson' '--internal' 'install' '/home/kaii/fuse/kaii/meson-private/install.dat'
+ COMMAND = '/usr/bin/python3' '/usr/share/meson/meson' '--internal' 'install' '/home/kaii/ass-os-group-10/kaii/meson-private/install.dat'
  pool = console
 
 # Suffix
 
 build scan-build: CUSTOM_COMMAND PHONY
- COMMAND = '/usr/bin/python3' '/usr/share/meson/meson' '--internal' 'scanbuild' '/home/kaii/fuse' '/home/kaii/fuse/kaii' '/usr/bin/python3' '/usr/share/meson/meson' '-Ddisable-mtab=false'
+ COMMAND = '/usr/bin/python3' '/usr/share/meson/meson' '--internal' 'scanbuild' '/home/kaii/ass-os-group-10' '/home/kaii/ass-os-group-10/kaii' '/usr/bin/python3' '/usr/share/meson/meson' '-Ddisable-mtab=false'
  pool = console
 
 build uninstall: CUSTOM_COMMAND PHONY
  COMMAND = '/usr/bin/python3' '/usr/share/meson/meson' '--internal' 'uninstall'
  pool = console
 
-build all: phony example/vcowfs lib/libfuse3.so.3.0.0 util/mount.fuse3 test/wrong_command util/fusermount3 test/test_syscalls test/test_write_cache test/conftest.py test/test_setattr
+build all: phony util/mount.fuse3 util/fusermount3 test/test_write_cache test/test_syscalls test/conftest.py lib/libfuse3.so.3.0.0 example/vcowfs test/test_setattr test/wrong_command
 
 default all
 
 build clean-ctlist: CUSTOM_COMMAND PHONY
- COMMAND = '/usr/bin/python3' '/usr/share/meson/meson' '--internal' 'cleantrees' '/home/kaii/fuse/kaii/meson-private/cleantrees.dat'
+ COMMAND = '/usr/bin/python3' '/usr/share/meson/meson' '--internal' 'cleantrees' '/home/kaii/ass-os-group-10/kaii/meson-private/cleantrees.dat'
  description = 'Cleaning$ CustomTarget$ directories'
 
 build clean: CUSTOM_COMMAND PHONY | clean-ctlist
