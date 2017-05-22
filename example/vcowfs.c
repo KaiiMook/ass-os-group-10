@@ -1,326 +1,216 @@
 /*
   FUSE: Filesystem in Userspace
   Copyright (C) 2001-2007  Miklos Szeredi <miklos@szeredi.hu>
-  Copyright (C) 2011       Sebastian Pipping <sebastian@pipping.org>
+
   This program can be distributed under the terms of the GNU GPL.
   See the file COPYING.
 */
+
+/** @file
+ *
+ * minimal example filesystem using high-level API
+ *
+ * Compile with:
+ *
+ *     gcc -Wall hello.c `pkg-config fuse3 --cflags --libs` -o hello
+ *
+ * ## Source code ##
+ * \include hello.c
+ */
+
+
 #define FUSE_USE_VERSION 30
 
+#include <config.h>
 
 #include <fuse.h>
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
+#include <errno.h>
 #include <fcntl.h>
+#include <stddef.h>
+#include <assert.h>
+
+#ifdef linux
+/* For pread()/pwrite()/utimensat() */
+#define _XOPEN_SOURCE 700
+#endif
+#include <unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#include <errno.h>
 #include <sys/time.h>
+/*
+ * Command line options
+ *
+ * We can't set default values for the char* fields here because
+ * fuse_opt_parse would attempt to free() them when the user specifies
+ * different values on the command line.
+ */
+static struct options {
+	const char *filename;
+	const char *contents;
+	int show_help;
+} options;
 
-#include <time.h>
-#include <utime.h>
+#define OPTION(t, p)                           \
+    { t, offsetof(struct options, p), 1 }
+static const struct fuse_opt option_spec[] = {
+	OPTION("--name=%s", filename),
+	OPTION("--contents=%s", contents),
+	OPTION("-h", show_help),
+	OPTION("--help", show_help),
+	FUSE_OPT_END
+};
 
-int rev_time;
-char* mount_path;
-
-char* get_filename(char* str) {
-    int i, index=strlen(str)-1;
-    for(i=0; i<=index; index--) {
-        if(str[index] == '/') {
-            return &str[index];
-        }
-    }
-    return NULL;
+static void *hello_init(struct fuse_conn_info *conn,
+			struct fuse_config *cfg)
+{
+	(void) conn;
+	cfg->kernel_cache = 1;
+	return NULL;
 }
 
-static int myfs_getattr(const char *path, struct stat *stbuf,
-                       struct fuse_file_info *fi)
+static int hello_getattr(const char *path, struct stat *stbuf,
+			 struct fuse_file_info *fi)
 {
-        (void) fi;
-        int res;
-        res = lstat(path, stbuf);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
+	(void) fi;
+	int res = 0;
 
-static int myfs_mknod(const char *path, mode_t mode, dev_t rdev)
-{
-        int res;
-        /* On Linux this could just be 'mknod(path, mode, rdev)' but this
-           is more portable */
-        if (S_ISREG(mode)) {
-                res = open(path, O_CREAT | O_EXCL | O_WRONLY, mode);
-                if (res >= 0)
-                        res = close(res);
-        } else if (S_ISFIFO(mode))
-                res = mkfifo(path, mode);
-        else
-                res = mknod(path, mode, rdev);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
+	memset(stbuf, 0, sizeof(struct stat));
+	if (strcmp(path, "/") == 0) {
+		stbuf->st_mode = S_IFDIR | 0755;
+		stbuf->st_nlink = 2;
+	} else if (strcmp(path+1, options.filename) == 0) {
+		stbuf->st_mode = S_IFREG | 0444;
+		stbuf->st_nlink = 1;
+		stbuf->st_size = strlen(options.contents);
+	} else
+		res = -ENOENT;
 
-static int myfs_open(const char *path, struct fuse_file_info *fi)
-{
-	int res;
-
-	res = open(path, fi->flags);
-	if (res == -1)
-		return -errno;
-
-	fi->fh = res;
-	return 0;
+	return res;
 }
 
 
-static int myfs_mkdir(const char *path, mode_t mode)
+static int hello_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
+			 off_t offset, struct fuse_file_info *fi,
+			 enum fuse_readdir_flags flags)
 {
-  int res;
-  char* tmp[500];
-	res = mkdir(path, mode);
-	if (res == -1)
-		return -errno;
-  sprintf(tmp,"%s/archive",path);
-  res = mkdir(tmp, mode);
-  if (res == -1)
-		return -errno;
-  return 0;
-}
-
-static int myfs_unlink(const char *path)
-{
-        int res;
-        res = unlink(path);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
-
-static int myfs_rmdir(const char *path)
-{
-        int res;
-        res = rmdir(path);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
-
-static int myfs_rename(const char *from, const char *to, unsigned int flags)
-{
-        int res;
-        if (flags)
-                return -EINVAL;
-        res = rename(from, to);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
-
-static int myfs_chmod(const char *path, mode_t mode,
-                     struct fuse_file_info *fi)
-{
-        (void) fi;
-        int res;
-        res = chmod(path, mode);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
-
-static int myfs_chown(const char *path, uid_t uid, gid_t gid,
-                     struct fuse_file_info *fi)
-{
-        (void) fi;
-        int res;
-        res = lchown(path, uid, gid);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
-
-static int myfs_truncate(const char *path, off_t size,
-                        struct fuse_file_info *fi)
-{
-        int res;
-        if (fi != NULL)
-                res = ftruncate(fi->fh, size);
-        else
-                res = truncate(path, size);
-        if (res == -1)
-                return -errno;
-        return 0;
-}
-
-static int myfs_read(const char *path, char *buf, size_t size, off_t offset,
-                    struct fuse_file_info *fi)
-{
-        int fd;
-        int res;
-        if(fi == NULL)
-                fd = open(path, O_RDONLY);
-        else
-                fd = fi->fh;
-
-        if (fd == -1)
-                return -errno;
-        res = pread(fd, buf, size, offset);
-        if (res == -1)
-                res = -errno;
-        if(fi == NULL)
-                close(fd);
-        return res;
-}
-
-static int myfs_write(const char *path, const char *buf, size_t size,
-                     off_t offset, struct fuse_file_info *fi)
-{
-        int fd;
-        int res;
-        (void) fi;
-        char fullBackupPath[500];
-        char fullMountPoint[500];
-        FILE * openFileforBackup;
-        time_t nowTime = time(NULL);
-        int lastModifiedTime;
-        int lastVersion = 1;
-        struct stat fileStat;
-        time_t secondLastModifiedTime;
-
-        sprintf(fullMountPoint, "%s%s", mount_path, path);
-        stat(fullMountPoint, &fileStat);
-        secondLastModifiedTime = fileStat.st_mtime;
-
-        if(fi == NULL)
-                fd = open(fullMountPoint, O_WRONLY);
-        else
-                fd = fi->fh;
-
-        if (fd == -1)
-                return -errno;
-        res = pwrite(fd, buf, size, offset);
-        if (res == -1)
-                res = -errno;
-        if(fi == NULL)
-                close(fd);
-
-        do
-        {
-            sprintf(fullBackupPath, "%s%s%s%c%d", mount_path, "/archive/", path, '.', lastVersion);
-            openFileforBackup = fopen(fullBackupPath, "r");
-            if(!openFileforBackup) break;
-            lastVersion++;
-            fclose(openFileforBackup);
-
-        } while (openFileforBackup);
-
-        // retrieve for newest Last version number
-
-        if (nowTime - secondLastModifiedTime > rev_time) // create snapshot
-        {
-            printf("Create snapshot for last version %d.\n", lastVersion);
-        } else { // replace snapshot with new information
-            printf("Don't snap file, Just replace new information to last Version.\n");
-            if(lastVersion > 1) lastVersion--;
-            sprintf(fullBackupPath, "%s%s%s%c%d", mount_path, "/archive/", path, '.', lastVersion);
-        }
-
-        fd  = open(fullBackupPath, O_WRONLY);
-        res = pwrite(fd, buf, size, offset);
-        close(fd);
-
-        printf("Last time is %d\n", secondLastModifiedTime);
-
-        return res;
-}
-
-static int myfs_release(const char *path, struct fuse_file_info *fi)
-{
-        (void) path;
-        close(fi->fh);
-        return 0;
-}
-static int myfs_fsync(const char *path, int isdatasync,
-                     struct fuse_file_info *fi)
-{
-        /* Just a stub.  This method is optional and can safely be left
-           unimplemented */
-        (void) path;
-        (void) isdatasync;
-        (void) fi;
-        return 0;
-}
-
-static int myfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
-		       off_t offset, struct fuse_file_info *fi,
-		       enum fuse_readdir_flags flags)
-{
-	DIR *dp;
-	struct dirent *de;
-
 	(void) offset;
 	(void) fi;
 	(void) flags;
 
-	dp = opendir(path);
-	if (dp == NULL)
-		return -errno;
+	if (strcmp(path, "/") != 0)
+		return -ENOENT;
 
-	while ((de = readdir(dp)) != NULL) {
-		struct stat st;
-		memset(&st, 0, sizeof(st));
-		st.st_ino = de->d_ino;
-		st.st_mode = de->d_type << 12;
-		if (filler(buf, de->d_name, &st, 0, 0))
-			break;
-	}
+	filler(buf, ".", NULL, 0, 0);
+	filler(buf, "..", NULL, 0, 0);
+	filler(buf, options.filename, NULL, 0, 0);
 
-	closedir(dp);
 	return 0;
 }
 
-static struct fuse_operations OP = {
-        .getattr        = myfs_getattr,
-        .mknod          = myfs_mknod,
-        .mkdir          = myfs_mkdir,
-        .unlink         = myfs_unlink,
-        .rmdir          = myfs_rmdir,
-        .rename         = myfs_rename,
-        .chmod          = myfs_chmod,
-        .chown          = myfs_chown,
-        .truncate       = myfs_truncate,
-        .open           = myfs_open,
-        .read           = myfs_read,
-        .write          = myfs_write,
-        .release        = myfs_release,
-        //.opendir 	=
-        .readdir	= myfs_readdir
-        /*.releasedir =
-        .fsync 		=
-        .fsyncdir 	= */
+static int kaii_mknod(const char *path, mode_t mode, dev_t rdev)
+{
+	int res;
 
+	/* On Linux this could just be 'mknod(path, mode, rdev)' but this
+	   is more portable */
+	if (S_ISREG(mode)) {
+		res = open(path, O_CREAT | O_EXCL | O_WRONLY, mode);
+		if (res >= 0)
+			res = close(res);
+	} else if (S_ISFIFO(mode))
+		res = mkfifo(path, mode);
+	else
+		res = mknod(path, mode, rdev);
+	if (res == -1)
+		return -errno;
 
+	return 0;
+}
+static int hello_open(const char *path, struct fuse_file_info *fi)
+{
+	if (strcmp(path+1, options.filename) != 0)
+		return -ENOENT;
+
+	if ((fi->flags & O_ACCMODE) != O_RDONLY)
+		return -EACCES;
+
+	return 0;
+}
+
+static int hello_read(const char *path, char *buf, size_t size, off_t offset,
+		      struct fuse_file_info *fi)
+{
+	size_t len;
+	(void) fi;
+	if(strcmp(path+1, options.filename) != 0)
+		return -ENOENT;
+
+	len = strlen(options.contents);
+	if (offset < len) {
+		if (offset + size > len)
+			size = len - offset;
+		memcpy(buf, options.contents + offset, size);
+	} else
+		size = 0;
+
+	return size;
+}
+
+static struct fuse_operations hello_oper = {
+	.init           = hello_init,
+	.getattr	= hello_getattr,
+	.readdir	= hello_readdir,
+	.open		= hello_open,
+	.read		= hello_read,
+	.mknod 		= kaii_mknod,
 };
+
+static void show_help(const char *progname)
+{
+	printf("usage: %s [options] <mountpoint>\n\n", progname);
+	printf("File-system specific options:\n"
+	       "    --name=<s>          Name of the \"hello\" file\n"
+	       "                        (default: \"hello\")\n"
+	       "    --contents=<s>      Contents \"hello\" file\n"
+	       "                        (default \"Hello, World!\\n\")\n"
+	       "\n");
+}
 
 int main(int argc, char *argv[])
 {
-  if(argc == 5 && !strcmp(argv[3], "-t")){
-    char *tmp[2];
-    tmp[0] = argv[0];
-  	tmp[1] = argv[2];
+	struct fuse_args args = FUSE_ARGS_INIT(argc, argv);
 
-    char* cmd[500];
-    sprintf(cmd,"mount %s %s",argv[1],argv[2]);
+	/* Set defaults -- we have to use strdup so that
+	   fuse_opt_parse can free the defaults if other
+	   values are specified */
+	options.filename = strdup("hello");
+	options.contents = strdup("Hello World!\n");
+
+	/* Parse options */
+	if (fuse_opt_parse(&args, &options, option_spec, NULL) == -1)
+		return 1;
+
+	/* When --help is specified, first print our own file-system
+	   specific help text, then signal fuse_main to show
+	   additional help (by adding `--help` to the options again)
+	   without usage: line (by setting argv[0] to the empty
+	   string) */
+	if (options.show_help) {
+		show_help(argv[0]);
+		assert(fuse_opt_add_arg(&args, "--help") == 0);
+		args.argv[0] = (char*) "";
+	}
+
+	char cmd[500];
+    sprintf(cmd,"mount %s %s",args.argv[1],args.argv[2]);
+    printf("Running > ... %s\n",cmd );
     system(cmd);
 
-    mount_path = argv[2]; // create variable for mount path
+    char *tmp[2];
+    tmp[0] = args.argv[0];
+  	tmp[1] = args.argv[2];
 
-    rev_time = atoi(argv[4]);
-    umask(0);
-    fuse_main(2,tmp,&OP,NULL);
-  }else{
-    printf("\t./vcowfs <Image File> <Moaunt Point> -t <Auto-snapshot Delay (seconds)>\n");
-  }
+	return fuse_main(2,tmp, &hello_oper, NULL);
 }
