@@ -39,8 +39,6 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <sys/time.h>
-#include <sys/types.h>
-
 /*
  * Command line options
  *
@@ -114,7 +112,7 @@ static int hello_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 static int kaii_mknod(const char *path, mode_t mode, dev_t rdev)
 {
 	int res;
-	printf("mknod to path > %s\n",path );
+
 	/* On Linux this could just be 'mknod(path, mode, rdev)' but this
 	   is more portable */
 	if (S_ISREG(mode)) {
@@ -130,8 +128,6 @@ static int kaii_mknod(const char *path, mode_t mode, dev_t rdev)
 
 	return 0;
 }
-
-
 static int hello_open(const char *path, struct fuse_file_info *fi)
 {
 	if (strcmp(path+1, options.filename) != 0)

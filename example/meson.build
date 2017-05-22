@@ -4,7 +4,7 @@
 examples = [ 'passthrough', 'passthrough_fh', 'null', 'hello', 'hello_ll',
              'ioctl', 'ioctl_client', 'poll_client',
              'passthrough_ll', 'cuse', 'cuse_client' ,
-             'vcowfs']
+             'vcowfs','vcowfs3']
 
 threaded_examples = [ 'notify_inval_inode',
                       'notify_store_retrieve',
