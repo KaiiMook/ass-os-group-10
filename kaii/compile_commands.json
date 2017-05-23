@@ -1,6 +1,11 @@
 [
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iutil/mount.fuse3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'util/mount.fuse3@exe/mount.fuse.c.o' '-MF' 'util/mount.fuse3@exe/mount.fuse.c.o.d' -o 'util/mount.fuse3@exe/mount.fuse.c.o' -c ../util/mount.fuse.c",
+    "file": "../util/mount.fuse.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
     "command": "cc  '-Ilib/fuse3@sha' '-Ilib' '-I../lib' '-I.' '-I../' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-fPIC' '-pthread' '-DFUSE_USE_VERSION=30' '-DFUSERMOUNT_DIR=\"{}\"' '-MMD' '-MQ' 'lib/fuse3@sha/fuse.c.o' '-MF' 'lib/fuse3@sha/fuse.c.o.d' -o 'lib/fuse3@sha/fuse.c.o' -c ../lib/fuse.c",
     "file": "../lib/fuse.c"
   },
@@ -66,53 +71,8 @@
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/notify_inval_inode@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/notify_inval_inode@exe/notify_inval_inode.c.o' '-MF' 'example/notify_inval_inode@exe/notify_inval_inode.c.o.d' -o 'example/notify_inval_inode@exe/notify_inval_inode.c.o' -c ../example/notify_inval_inode.c",
-    "file": "../example/notify_inval_inode.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/passthrough_fh@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/passthrough_fh@exe/passthrough_fh.c.o' '-MF' 'example/passthrough_fh@exe/passthrough_fh.c.o.d' -o 'example/passthrough_fh@exe/passthrough_fh.c.o' -c ../example/passthrough_fh.c",
-    "file": "../example/passthrough_fh.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/poll_client@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/poll_client@exe/poll_client.c.o' '-MF' 'example/poll_client@exe/poll_client.c.o.d' -o 'example/poll_client@exe/poll_client.c.o' -c ../example/poll_client.c",
-    "file": "../example/poll_client.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/notify_inval_entry@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/notify_inval_entry@exe/notify_inval_entry.c.o' '-MF' 'example/notify_inval_entry@exe/notify_inval_entry.c.o.d' -o 'example/notify_inval_entry@exe/notify_inval_entry.c.o' -c ../example/notify_inval_entry.c",
-    "file": "../example/notify_inval_entry.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/poll@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/poll@exe/poll.c.o' '-MF' 'example/poll@exe/poll.c.o.d' -o 'example/poll@exe/poll.c.o' -c ../example/poll.c",
-    "file": "../example/poll.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Itest/test_write_cache@exe' '-Itest' '-I../test' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'test/test_write_cache@exe/test_write_cache.c.o' '-MF' 'test/test_write_cache@exe/test_write_cache.c.o.d' -o 'test/test_write_cache@exe/test_write_cache.c.o' -c ../test/test_write_cache.c",
-    "file": "../test/test_write_cache.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Itest/wrong_command@exe' '-Itest' '-I../test' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'test/wrong_command@exe/wrong_command.c.o' '-MF' 'test/wrong_command@exe/wrong_command.c.o.d' -o 'test/wrong_command@exe/wrong_command.c.o' -c ../test/wrong_command.c",
-    "file": "../test/wrong_command.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/ioctl@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/ioctl@exe/ioctl.c.o' '-MF' 'example/ioctl@exe/ioctl.c.o.d' -o 'example/ioctl@exe/ioctl.c.o' -c ../example/ioctl.c",
-    "file": "../example/ioctl.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/notify_store_retrieve@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/notify_store_retrieve@exe/notify_store_retrieve.c.o' '-MF' 'example/notify_store_retrieve@exe/notify_store_retrieve.c.o.d' -o 'example/notify_store_retrieve@exe/notify_store_retrieve.c.o' -c ../example/notify_store_retrieve.c",
-    "file": "../example/notify_store_retrieve.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iutil/mount.fuse3@exe' '-Iutil' '-I../util' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'util/mount.fuse3@exe/mount.fuse.c.o' '-MF' 'util/mount.fuse3@exe/mount.fuse.c.o.d' -o 'util/mount.fuse3@exe/mount.fuse.c.o' -c ../util/mount.fuse.c",
-    "file": "../util/mount.fuse.c"
+    "command": "cc  '-Iexample/vcowfs@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/vcowfs@exe/vcowfs.c.o' '-MF' 'example/vcowfs@exe/vcowfs.c.o.d' -o 'example/vcowfs@exe/vcowfs.c.o' -c ../example/vcowfs.c",
+    "file": "../example/vcowfs.c"
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
@@ -121,18 +81,23 @@
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Itest/wrong_command@exe' '-Itest' '-I../test' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'test/wrong_command@exe/wrong_command.c.o' '-MF' 'test/wrong_command@exe/wrong_command.c.o.d' -o 'test/wrong_command@exe/wrong_command.c.o' -c ../test/wrong_command.c",
+    "file": "../test/wrong_command.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
     "command": "cc  '-Itest/test_syscalls@exe' '-Itest' '-I../test' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'test/test_syscalls@exe/test_syscalls.c.o' '-MF' 'test/test_syscalls@exe/test_syscalls.c.o.d' -o 'test/test_syscalls@exe/test_syscalls.c.o' -c ../test/test_syscalls.c",
     "file": "../test/test_syscalls.c"
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/null@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/null@exe/null.c.o' '-MF' 'example/null@exe/null.c.o.d' -o 'example/null@exe/null.c.o' -c ../example/null.c",
-    "file": "../example/null.c"
+    "command": "cc  '-Iexample/notify_store_retrieve@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/notify_store_retrieve@exe/notify_store_retrieve.c.o' '-MF' 'example/notify_store_retrieve@exe/notify_store_retrieve.c.o.d' -o 'example/notify_store_retrieve@exe/notify_store_retrieve.c.o' -c ../example/notify_store_retrieve.c",
+    "file": "../example/notify_store_retrieve.c"
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/hello@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/hello@exe/hello.c.o' '-MF' 'example/hello@exe/hello.c.o.d' -o 'example/hello@exe/hello.c.o' -c ../example/hello.c",
-    "file": "../example/hello.c"
+    "command": "cc  '-Iexample/ioctl_client@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/ioctl_client@exe/ioctl_client.c.o' '-MF' 'example/ioctl_client@exe/ioctl_client.c.o.d' -o 'example/ioctl_client@exe/ioctl_client.c.o' -c ../example/ioctl_client.c",
+    "file": "../example/ioctl_client.c"
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
@@ -141,23 +106,13 @@
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/vcowfs3@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/vcowfs3@exe/vcowfs3.c.o' '-MF' 'example/vcowfs3@exe/vcowfs3.c.o.d' -o 'example/vcowfs3@exe/vcowfs3.c.o' -c ../example/vcowfs3.c",
-    "file": "../example/vcowfs3.c"
+    "command": "cc  '-Iexample/hello@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/hello@exe/hello.c.o' '-MF' 'example/hello@exe/hello.c.o.d' -o 'example/hello@exe/hello.c.o' -c ../example/hello.c",
+    "file": "../example/hello.c"
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/passthrough@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/passthrough@exe/passthrough.c.o' '-MF' 'example/passthrough@exe/passthrough.c.o.d' -o 'example/passthrough@exe/passthrough.c.o' -c ../example/passthrough.c",
-    "file": "../example/passthrough.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/passthrough_ll@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/passthrough_ll@exe/passthrough_ll.c.o' '-MF' 'example/passthrough_ll@exe/passthrough_ll.c.o.d' -o 'example/passthrough_ll@exe/passthrough_ll.c.o' -c ../example/passthrough_ll.c",
-    "file": "../example/passthrough_ll.c"
-  },
-  {
-    "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/ioctl_client@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/ioctl_client@exe/ioctl_client.c.o' '-MF' 'example/ioctl_client@exe/ioctl_client.c.o.d' -o 'example/ioctl_client@exe/ioctl_client.c.o' -c ../example/ioctl_client.c",
-    "file": "../example/ioctl_client.c"
+    "command": "cc  '-Iexample/poll_client@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/poll_client@exe/poll_client.c.o' '-MF' 'example/poll_client@exe/poll_client.c.o.d' -o 'example/poll_client@exe/poll_client.c.o' -c ../example/poll_client.c",
+    "file": "../example/poll_client.c"
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
@@ -171,8 +126,38 @@
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/notify_inval_inode@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/notify_inval_inode@exe/notify_inval_inode.c.o' '-MF' 'example/notify_inval_inode@exe/notify_inval_inode.c.o.d' -o 'example/notify_inval_inode@exe/notify_inval_inode.c.o' -c ../example/notify_inval_inode.c",
+    "file": "../example/notify_inval_inode.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/null@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/null@exe/null.c.o' '-MF' 'example/null@exe/null.c.o.d' -o 'example/null@exe/null.c.o' -c ../example/null.c",
+    "file": "../example/null.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
     "command": "cc  '-Iexample/cuse_client@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/cuse_client@exe/cuse_client.c.o' '-MF' 'example/cuse_client@exe/cuse_client.c.o.d' -o 'example/cuse_client@exe/cuse_client.c.o' -c ../example/cuse_client.c",
     "file": "../example/cuse_client.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/passthrough_ll@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/passthrough_ll@exe/passthrough_ll.c.o' '-MF' 'example/passthrough_ll@exe/passthrough_ll.c.o.d' -o 'example/passthrough_ll@exe/passthrough_ll.c.o' -c ../example/passthrough_ll.c",
+    "file": "../example/passthrough_ll.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/poll@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/poll@exe/poll.c.o' '-MF' 'example/poll@exe/poll.c.o.d' -o 'example/poll@exe/poll.c.o' -c ../example/poll.c",
+    "file": "../example/poll.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/passthrough_fh@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/passthrough_fh@exe/passthrough_fh.c.o' '-MF' 'example/passthrough_fh@exe/passthrough_fh.c.o.d' -o 'example/passthrough_fh@exe/passthrough_fh.c.o' -c ../example/passthrough_fh.c",
+    "file": "../example/passthrough_fh.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/passthrough@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/passthrough@exe/passthrough.c.o' '-MF' 'example/passthrough@exe/passthrough.c.o.d' -o 'example/passthrough@exe/passthrough.c.o' -c ../example/passthrough.c",
+    "file": "../example/passthrough.c"
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
@@ -181,7 +166,17 @@
   },
   {
     "directory": "/home/kaii/ass-os-group-10/kaii",
-    "command": "cc  '-Iexample/vcowfs@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/vcowfs@exe/vcowfs.c.o' '-MF' 'example/vcowfs@exe/vcowfs.c.o.d' -o 'example/vcowfs@exe/vcowfs.c.o' -c ../example/vcowfs.c",
-    "file": "../example/vcowfs.c"
+    "command": "cc  '-Itest/test_write_cache@exe' '-Itest' '-I../test' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'test/test_write_cache@exe/test_write_cache.c.o' '-MF' 'test/test_write_cache@exe/test_write_cache.c.o.d' -o 'test/test_write_cache@exe/test_write_cache.c.o' -c ../test/test_write_cache.c",
+    "file": "../test/test_write_cache.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/ioctl@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-MMD' '-MQ' 'example/ioctl@exe/ioctl.c.o' '-MF' 'example/ioctl@exe/ioctl.c.o.d' -o 'example/ioctl@exe/ioctl.c.o' -c ../example/ioctl.c",
+    "file": "../example/ioctl.c"
+  },
+  {
+    "directory": "/home/kaii/ass-os-group-10/kaii",
+    "command": "cc  '-Iexample/notify_inval_entry@exe' '-Iexample' '-I../example' '-I.' '-I../' '-Ilib' '-I../lib' '-Iinclude' '-I../include' '-fdiagnostics-color=always' '-pipe' '-D_FILE_OFFSET_BITS=64' '-D_REENTRANT' '-DHAVE_CONFIG_H' '-Wall' '-Wextra' '-Wno-sign-compare' '-Wstrict-prototypes' '-Wmissing-declarations' '-Wwrite-strings' '-O2' '-g' '-fno-strict-aliasing' '-Wno-unused-result' '-pthread' '-MMD' '-MQ' 'example/notify_inval_entry@exe/notify_inval_entry.c.o' '-MF' 'example/notify_inval_entry@exe/notify_inval_entry.c.o.d' -o 'example/notify_inval_entry@exe/notify_inval_entry.c.o' -c ../example/notify_inval_entry.c",
+    "file": "../example/notify_inval_entry.c"
   }
 ]
